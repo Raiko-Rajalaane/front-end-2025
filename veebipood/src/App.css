@@ -1,0 +1,35 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.pilt {
+  height: 100px;
+  /* width: 100px; */
+  border-radius: 10px;
+}
+
+.pilt:hover {
+  opacity: 70%;
+  cursor: pointer;
+}
+
+.pilt:active{
+  transform: scale(0.9);
+}
+
+.tekst {
+  font-weight: bold;
+  font-size: 50px;
+}
+
+.tekst:hover {
+  text-decoration: underline;
+  cursor: e-resize;
+}
+
+.tekst:active {
+  color: brown;
+}
