@@ -1,0 +1,56 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.main-picture {
+  height: 200px;
+  width: 1000px;
+  border-radius: 10px;
+  display: flex;
+}
+
+.rectangle {
+  height: 7px;
+  width: 60px;
+  background-color: rgb(255, 179, 39);
+  margin: 50px auto;
+}
+
+.navigation-pictures img {
+  height: 175px;
+  width: 200px;
+  cursor: pointer
+  
+}
+
+.navigation-pictures img:hover {
+  scale: 1.1;
+  transition: 0.5s;
+  box-shadow: 0 8px 100px 0px;
+
+}
+
+.main-link {
+  color: rgb(0, 255, 0);
+  background-color: white;
+  width: 300px;
+  height: 200px;
+  margin-top: 20px;
+  padding: 20px 0;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  font-family: 'Roboto';
+}
+
+.linkedin-nupuke img {
+  height: 50px;
+}
+
+.linkedin-nupuke:hover {
+  color:aqua
+}
+

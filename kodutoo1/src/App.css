@@ -40,3 +40,62 @@
 .read-the-docs {
   color: #888;
 }
+
+.rohenupp {
+  color: lightgray;
+  background-color: green;
+}
+
+.rohenupp:hover {
+  height: 100px;
+}
+
+.rohenupp:active {
+  cursor:grab;
+}
+
+.sinitekst {
+  color: blue;
+  font-style: italic;
+}
+
+.sinitekst:hover {
+  font-size: 24px;
+}
+
+.rohetekst {
+  font-weight: bold;
+  border: 5px solid red;
+}
+
+.rohetekst:hover {
+  border-color: brown;
+}
+
+.lilleke {
+  position: absolute;
+  right: 0;
+  height: 100px;
+  width: 150px;
+}
+
+.lilleke:hover {
+  border-radius: 10px;
+  opacity: 70%;
+}
+
+.tabel {
+  font-family: Arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}

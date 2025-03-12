@@ -49,3 +49,7 @@
   border: 2px solid rgb(227 6 140);
   text-decoration: underline;
 }
+
+.red {
+  color: red;
+}
