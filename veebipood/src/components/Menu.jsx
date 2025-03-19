@@ -22,16 +22,20 @@ function Menu() {
     <button>Lisa toode</button>
   </Link>
 
-  <Link to="/esindused">
-    <button>Esindused</button>
-  </Link>
-
   <Link to="/osta-kinkekaart">
     <button>Kinkekaardid</button>
   </Link>
 
   <Link to="/kalkulaator">
     <button>Kalkulaator</button>
+  </Link>
+
+  <Link to="/arrays-home">
+    <button>Arrays</button>
+  </Link>
+
+  <Link to="/halda-home">
+    <button>Admin: Halda</button>
   </Link>
 
   </div>

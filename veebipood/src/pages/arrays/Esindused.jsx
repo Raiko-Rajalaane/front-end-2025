@@ -1,4 +1,5 @@
 import { useState } from "react"
+import esindusedFailist from "../../data/esindused.json"
 
 // 1 võrdusmärk --> väärtuse andmiseks
 // 2 võrdusmärki --> identsuse kontrolliks,
@@ -6,6 +7,22 @@ import { useState } from "react"
 
 function Esindused() {
   const [linn, setLinn] = useState("Tallinn");
+  const [esindused, setEsindused] = useState(esindusedFailist.slice());
+
+
+// sorteeri A-Z
+// sorteeri Z-A
+// tähed kasvavalt
+// tähed kahanevalt
+// neljas täht A-Z
+// sorteeri sõnad arvu järgi
+
+// filtreeri e'ga lõppevad
+// vähemalt 7 tähelised
+// täpselt 9 tähelised
+// "is" lühendit sisaldavad
+// kellel on 4's täht "s"
+// paarisarv tähti sisaldavad
 
   return (
     <div>
@@ -17,12 +34,17 @@ function Esindused() {
 
         {linn === "Tallinn" && 
         <>
-          <div>Ülemiste</div>
+          {/* <div>Ülemiste</div>
           <div>Rocca al Mare</div>
           <div>Magistrali</div>
           <div>Vesse</div>
           <div>Kristiine</div>
-          <div>Järveotsa</div>
+          <div>Järveotsa</div> */}
+
+          {esindused.map(esindus => 
+          <div key={esindus.keskus}>
+            {esindus.keskus} (+372{esindus.tel})
+          </div>)}
         </>
         }
 
