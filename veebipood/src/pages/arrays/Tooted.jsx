@@ -1,6 +1,7 @@
 import { useRef, useState } from "react"
 import tootedFailist from "../../data/tooted.json"
 import { Link } from "react-router-dom";
+// import ostukorvFailist from "../../data/ostukorv.json"
 
 function Tooted() {
   const [tooted, setTooted] = useState(tootedFailist.slice());
@@ -10,12 +11,12 @@ function Tooted() {
     setTooted(tootedFailist.slice())
   }
 
-  const SorteeriAZ = () => {
+  const sorteeriAZ = () => {
     tooted.sort((a, b) => a.nimi.localeCompare(b.nimi));
     setTooted(tooted.slice());
   }
 
-  const SorteeriZA = () => {
+  const sorteeriZA = () => {
     tooted.sort((a, b) => b.nimi.localeCompare(a.nimi));
     setTooted(tooted.slice());
   }
@@ -67,12 +68,27 @@ function Tooted() {
     );
     setTooted(vastus);
   }
+
+
+  const lisaOstukorvi = (klikitudToode) => {
+    // ostukorvFailist.push(klikitudToode);
+    const ostukorv = JSON.parse(localStorage.getItem("ostukorv")) || [];
+    ostukorv.push(klikitudToode);
+    localStorage.setItem("ostukorv", JSON.stringify(ostukorv));
+  }
+
+  // 1. võtta localStorage-st vana ostukorvi seis (localStorage.getItem)
+  // 1b. kui on tühi, siis võtta tühi array (|| [])
+  //    2. võtta localStorage-st saadud väärtustelt jutumärgid ära (JSON.parse)
+  // 3. lisama ühe toote localStorage-st võetud seisule juurde (.push)
+  //    4. panema localStorage-sse lisatava väärtustele jutumärgid tagasi (JSON.stringify)
+  // 5. panema localStorage-sse selle lisatud tootega tagasi (localStorage.setItem)
   
 
   return (
     <div>
-      <button onClick={SorteeriAZ}>Sorteeri A-Z</button>
-      <button onClick={SorteeriZA}>Sorteeri Z-A</button>
+      <button onClick={sorteeriAZ}>Sorteeri A-Z</button>
+      <button onClick={sorteeriZA}>Sorteeri Z-A</button>
       <button onClick={sorteeriTahedKasv}>Sorteeri tähed kasvavalt</button>
       <button onClick={sorteeriTahedKah}>Sorteeri tähed kahanevalt</button>
       <button onClick={sorteeriTeineTahtAZ}>Sorteeri teise tähe järgi A-Z</button>
@@ -89,11 +105,12 @@ function Tooted() {
       <label htmlFor="otsingriba">Otsi:</label>
       <input ref={otsingRef} onChange={otsi} id="otsingriba" type="text" />
       {tooted.map((toode, index) => 
-      <div>
+      <div key={toode.nimi}>
         {toode.nimi}
         <Link to={"/toode/" + index}>
           <button>Vt. lähemalt</button>
-        </Link>  
+        </Link>
+        <button onClick={() => lisaOstukorvi(toode)}>Lisa ostukorvi</button>  
       </div>)}
     </div>
   )

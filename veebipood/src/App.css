@@ -57,12 +57,17 @@
 /* ilma punktita paneb globaalselt tagile kujundust */
 
 td, th {
-  border-width: 1px;
- 
+  padding: 8px;
+  text-align: left;
+  border: 1px solid #333;
 }
 
 table {
   margin: auto;
+}
+
+.table-image {
+  height: 100px;
 }
 
 .auto-pilt {

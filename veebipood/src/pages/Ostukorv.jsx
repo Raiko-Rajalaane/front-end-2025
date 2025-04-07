@@ -1,16 +1,17 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
-import ostukorvFailist from "../data/ostukorv.json"
+// import ostukorvFailist from "../data/ostukorv.json"
 import { useTranslation } from "react-i18next";
 
 function Ostukorv() {
 
-  const [tooted, setTooted] = useState(ostukorvFailist.slice())
+  const [tooted, setTooted] = useState(JSON.parse(localStorage.getItem("ostukorv")) || []);
   const { t } = useTranslation();
 
   const kustuta = (index) => {
-    ostukorvFailist.splice(index,1);
-    setTooted(ostukorvFailist.slice());
+   tooted.splice(index,1);
+    setTooted(tooted.slice());
+    localStorage.setItem("ostukorv", JSON.stringify(tooted));
   }
 
   const hinnadKokku = () => {
@@ -23,8 +24,7 @@ function Ostukorv() {
     <div>
         {tooted.length > 0 && <button onClick={() => setTooted([])}>Tühjenda</button>}
         {tooted.map((toode, index) => 
-         <div key={toode.nimi}>
-          <img style={{"width": "200px"}} src={toode.pilt} alt="" />
+         <div key={index}>
            {toode.nimi}: {toode.hind}€
            <button onClick={() => kustuta(index)}>X</button>
           </div>)}

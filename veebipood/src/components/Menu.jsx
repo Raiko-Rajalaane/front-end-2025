@@ -69,6 +69,10 @@ function Menu() {
     <button>Kontakteeru</button>
   </Link>
 
+  <Link to="/api-home">
+    <button>API</button>
+  </Link>
+
   <br /><br />
 
   <button onClick={muudaKeelEst}>EST</button>

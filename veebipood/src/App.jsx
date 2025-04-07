@@ -39,6 +39,18 @@ import LogiSisse from './pages/LogiSisse';
 import Registreeru from './pages/Registreeru';
 import Kaart from './pages/Kaart';
 import { Kontakteeru } from './pages/Kontakteeru';
+import Autod2 from './pages/api/Autod2';
+import Raamatud1 from './pages/api/Raamatud1';
+import Raamatud2 from './pages/api/Raamatud2';
+import Riigid from './pages/api/Riigid';
+import Riigid2 from './pages/api/Riigid2';
+import Sonastik from './pages/api/Sonastik';
+import Tarnija1 from './pages/api/Tarnija1';
+import Tarnija2 from './pages/api/Tarnija2';
+import Tarnija3 from './pages/api/Tarnija3';
+import Ujutused from './pages/api/Ujutused';
+import ApiHome from './pages/api/ApiHome';
+import Pakiautomaadid from './pages/api/Pakiautomaadid';
 
 
 function App() {
@@ -111,6 +123,22 @@ function App() {
           <Route path='/registreeru' element={ <Registreeru /> } />
           <Route path='/kaart' element={ <Kaart /> } /> 
           <Route path='/kontakteeru' element={ <Kontakteeru /> } />
+
+          <Route path='/api-home' element={ <ApiHome /> } />
+          <Route path='/autod2' element={ <Autod2 /> } />
+          <Route path='/raamatud1' element={ <Raamatud1 /> } />
+          <Route path='/raamatud2' element={ <Raamatud2 /> } /> 
+          <Route path='/riigid' element={ <Riigid /> } />
+          <Route path='/riigid2' element={ <Riigid2 /> } />
+          <Route path='/sonastik' element={ <Sonastik /> } /> 
+          <Route path='/tarnija1' element={ <Tarnija1 /> } />
+          <Route path='/tarnija2' element={ <Tarnija2 /> } />
+          <Route path='/tarnija3' element={ <Tarnija3 /> } />
+          <Route path='/ujutused' element={ <Ujutused /> } /> 
+          <Route path='/pakiautomaadid' element={ <Pakiautomaadid /> } /> 
+          
+
+
 
           <Route path='/*' element={ <NotFound /> } />
         </Routes>

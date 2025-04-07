@@ -1,6 +1,6 @@
 import { useRef, useState } from "react"
 import autodFailist from "../../data/autod.json";
-import ostukorvFailist from "../../data/ostukorv.json"
+// import ostukorvFailist from "../../data/ostukorv.json"
 import { Link } from "react-router-dom";
 
 function Autod() {
@@ -82,8 +82,10 @@ function Autod() {
     setAutod(vastus);
   }
 
-  const lisaOstukorvi = (auto) => {
-    ostukorvFailist.push(auto);
+  const lisaOstukorvi = (klikitudAuto) => {
+    const ostukorv = JSON.parse(localStorage.getItem("ostukorv")) || [];
+    ostukorv.push(klikitudAuto);
+    localStorage.setItem("ostukorv", JSON.stringify(ostukorv));
   }
 
   return (
