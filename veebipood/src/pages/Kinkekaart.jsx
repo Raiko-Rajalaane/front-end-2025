@@ -1,4 +1,5 @@
 import { useRef, useState } from "react"
+import ostukorvFailist from "../data/ostukorv.json"
 
 function Kinkekaart() {
   const [summa, setSumma] = useState(20);
@@ -21,6 +22,18 @@ function Kinkekaart() {
 
   }
 
+  const lisaOstukorvi = () => {
+    const kinkekaart = {
+      "nimi": "Kinkekaart",
+      "hind": summa * kogus,
+      "aktiivne": true,
+      "pilt": "https://saksavorst.ee/wp-content/uploads/2023/05/pw-gift-card.png"
+    }
+
+    ostukorvFailist.push(kinkekaart);
+    setSonum("Kinkekaart edukalt ostukorvi lisatud");
+  }
+
   return (
     <div>
       <button className ={summa === 20 ? "aktiivne" : undefined} onClick={() => setSumma(20)}>20€</button>
@@ -40,6 +53,10 @@ function Kinkekaart() {
       <label>Email</label> <br />
       <input ref={emailRef} type="text" /> <br />
       <button onClick={sisesta}>Sisesta</button>
+
+      <br /><br />
+
+      <button onClick={lisaOstukorvi}>Lisa kinkekaart ostukorvi</button>
     </div>
     
   )

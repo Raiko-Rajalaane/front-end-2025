@@ -1,0 +1,12 @@
+[
+    {"nimi": "Coca", "hind": 2, "aktiivne": true, "pilt": ""},
+    {"nimi": "Fanta", "hind": 1, "aktiivne": true, "pilt": ""},
+    {"nimi": "Sprite", "hind": 4, "aktiivne": true, "pilt": ""},
+    {"nimi": "Vichy", "hind": 3, "aktiivne": true, "pilt": ""},
+    {"nimi": "Red Bull", "hind": 1, "aktiivne": false, "pilt": ""},
+    {"nimi": "Aura", "hind": 3, "aktiivne": true, "pilt": ""},
+    {"nimi": "Monster Energy", "hind":5, "aktiivne": false, "pilt": ""},
+    {"nimi": "Vita Well", "hind": 6, "aktiivne": true, "pilt": ""},
+    {"nimi": "Vytautas", "hind": 8, "aktiivne": true, "pilt": ""},
+    {"nimi": "Värska", "hind": 10, "aktiivne": true, "pilt": ""}
+]

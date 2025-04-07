@@ -1,71 +1,89 @@
 import { useRef, useState } from "react"
 import autodFailist from "../../data/autod.json";
+import ostukorvFailist from "../../data/ostukorv.json"
+import { Link } from "react-router-dom";
 
 function Autod() {
   const [autod, setAutod] = useState(autodFailist.slice());
   const otsingRef = useRef();
 
+  const reset = () => {
+    setAutod(autodFailist.slice());
+  }
+
+  const sorteeriHindKasvavalt = () => {
+    autod.sort((a, b) => a.hind - b.hind);
+    setAutod(autod.slice());
+  }
+
+  const sorteeriHindKahanevalt = () => {
+    autod.sort((a, b) => b.hind - a.hind);
+    setAutod(autod.slice());
+  }
+
   const sorteeriAZ = () => {
-    autod.sort((a, b) => a.localeCompare(b));
+    autod.sort((a, b) => a.nimi.localeCompare(b.nimi));
     setAutod(autod.slice());
   }
 
   const sorteeriZA = () => {
-    autod.sort((a, b) => b.localeCompare(a));
+    autod.sort((a, b) => b.nimi.localeCompare(a.nimi));
     setAutod(autod.slice());
   }
 
   const sorteeriKolmasTahtAZ = () => {
-    autod.sort((a, b) => a[2].localeCompare(b[2]));
+    autod.sort((a, b) => a.nimi[2].localeCompare(b.nimi[2]));
     setAutod(autod.slice());
   }
   
 
   const sorteeriKasvavalt = () => {
-    autod.sort((a, b) => a.length - b.length);
+    autod.sort((a, b) => a.nimi.length - b.nimi.length);
     setAutod(autod.slice());
   }
 
   const sorteeriKahanevalt = () => {
-    autod.sort((a, b) => b.length - a.length);
+    autod.sort((a, b) => b.nimi.length - a.nimi.length);
     setAutod(autod.slice());
   }
 
   const filtreeriTeineTahtO = () => {
-    const vastus = autodFailist.filter(auto => auto[1] === "o");
+    const vastus = autodFailist.filter(auto => auto.nimi[1] === "o");
     setAutod(vastus);
   }
 
   const filtreeriSisaldabA = () => {
-    const vastus = autodFailist.filter(auto => auto.includes("a"));
+    const vastus = autodFailist.filter(auto => auto.nimi.includes("a"));
     setAutod(vastus);
   }
 
   const filtreeriTahemarke4 = () => {
-    const vastus = autodFailist.filter(auto => auto.length === 4);
+    const vastus = autodFailist.filter(auto => auto.nimi.length === 4);
     setAutod(vastus);
   }
 
   const filtreeriTahemarkeVah5 = () => {
-    const vastus = autodFailist.filter(auto => auto.length >= 5);
+    const vastus = autodFailist.filter(auto => auto.nimi.length >= 5);
     setAutod(vastus);
   }
 
   const filtreeriLoppebTahegaI = () => {
-    const vastus = autodFailist.filter(auto => auto.endsWith("i"));
+    const vastus = autodFailist.filter(auto => auto.nimi.endsWith("i"));
     setAutod(vastus);
   }
 
-  const reset = () => {
-    setAutod(autodFailist.slice());
-  }
+
 
   const otsi = () => {
-    const vastus = autodFailist.filter(auto => auto
+    const vastus = autodFailist.filter(auto => auto.nimi
       .toLowerCase()
       .includes(otsingRef.current.value.toLowerCase()) 
     );
     setAutod(vastus);
+  }
+
+  const lisaOstukorvi = (auto) => {
+    ostukorvFailist.push(auto);
   }
 
   return (
@@ -76,6 +94,8 @@ function Autod() {
       <br />
       <div>Autosid on kokku: {autod.length}</div>
       <button onClick={reset}>Reset</button><br />
+      <button onClick={sorteeriHindKasvavalt}>Sorteeri hinnad kasvavalt</button>
+      <button onClick={sorteeriHindKahanevalt}>Sorteeri hinnad kahanevalt</button> <br />
       <button onClick={sorteeriAZ}>Sorteeri A-Z</button>
       <button onClick={sorteeriZA}>Sorteeri Z-A</button> <br />
       <button onClick={sorteeriKolmasTahtAZ}>Sorteeri kolmanda tähe järgi A-Z</button> <br />
@@ -89,7 +109,15 @@ function Autod() {
       <button onClick={filtreeriLoppebTahegaI}>Jäta alles kes lõppeb 'i' tähega</button>
       
       
-      {autod.map(auto => <div key={auto}>{auto}</div>)}
+      {autod.map((auto, index) => 
+      <div key={auto.nimi}>
+        {auto.nimi} - {auto.hind}€
+        <button onClick={() => lisaOstukorvi(auto)} >Lisa ostukorvi</button>
+        
+        <Link to={"/auto/" + index}>
+          <button>Vt lähemalt</button>
+        </Link>
+      </div>)}
     </div>
   )
 }

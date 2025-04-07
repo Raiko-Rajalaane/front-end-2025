@@ -1,5 +1,6 @@
 import { useState } from "react"
 import kasutajadFailist from "../../data/kasutajad.json"
+import { Link } from "react-router-dom";
 
 
 function Kasutajad() {
@@ -21,7 +22,13 @@ function Kasutajad() {
       <button onClick={sorteeriAZ} >Sorteeri A-Z</button>
       <button onClick={sorteeriTahedKasv} >Sorteeri tähemärgid kasvavalt</button>
       <br /> <br />
-      {kasutajad.map(kasutaja => <div key={kasutaja.email}>{kasutaja.email}</div>)}
+      {kasutajad.map((kasutaja, index) => 
+      <div key={kasutaja.email}>
+        {kasutaja.email}
+        <Link to={"/kasutaja/" + index}>
+          <button>Vt. lähemalt</button>
+        </Link>
+      </div>)}
     </div>
   )
 }

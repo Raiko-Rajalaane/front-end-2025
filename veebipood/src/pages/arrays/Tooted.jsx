@@ -1,27 +1,104 @@
+import { useRef, useState } from "react"
+import tootedFailist from "../../data/tooted.json"
+import { Link } from "react-router-dom";
 
 function Tooted() {
+  const [tooted, setTooted] = useState(tootedFailist.slice());
+  const otsingRef = useRef();
 
-  // Coca, Fanta, Sprite, Vichy, Red Bull, Aura, Monster Energy, .... 3tk mõelda veel
+  const reset = () => {
+    setTooted(tootedFailist.slice())
+  }
+
+  const SorteeriAZ = () => {
+    tooted.sort((a, b) => a.nimi.localeCompare(b.nimi));
+    setTooted(tooted.slice());
+  }
+
+  const SorteeriZA = () => {
+    tooted.sort((a, b) => b.nimi.localeCompare(a.nimi));
+    setTooted(tooted.slice());
+  }
+
+  const sorteeriTahedKasv = () => {
+    tooted.sort((a, b) => a.nimi.length -b.nimi.length);
+    setTooted(tooted.slice());
+  }
+
+  const sorteeriTahedKah = () => {
+    tooted.sort((a, b) => b.nimi.length - a.nimi.length);
+    setTooted(tooted.slice());
+  }
+
+  const sorteeriTeineTahtAZ = () => {
+    tooted.sort((a, b) => a.nimi[1].localeCompare(b.nimi[1], "et"));
+    setTooted(tooted.slice());
+  }
+
+  const filtreeriTahemarkeKuni6 = () => {
+    const vastus = tootedFailist.filter(toode => toode.nimi.length <= 6)
+    setTooted(vastus);
+  }
+
+  const filtreeriTahemarke6 = () => {
+    const vastus = tootedFailist.filter(toode => toode.nimi.length === 6);
+    setTooted(vastus);
+  }
+
+  const filtreeriLoppebTahegaA = () => {
+    const vastus = tootedFailist.filter(toode => toode.nimi.endsWith("a"));
+    setTooted(vastus);
+  }
+
+  const filtreeriLoppebTahegaY = () => {
+    const vastus = tootedFailist.filter(toode => toode.nimi.endsWith("y"));
+    setTooted(vastus);
+  }
+
+  const filtreeriPaarisarvud = () => {
+    const vastus = tootedFailist.filter(toode => toode.nimi.length % 2 === 0)
+    setTooted(vastus);
+  }
+
+  const otsi = () => {
+    const vastus = tootedFailist.filter(toode => toode.nimi
+      .toLowerCase()
+      .includes(otsingRef.current.value.toLowerCase())
+    );
+    setTooted(vastus);
+  }
+  
+
   return (
     <div>
-      Tooted
+      <button onClick={SorteeriAZ}>Sorteeri A-Z</button>
+      <button onClick={SorteeriZA}>Sorteeri Z-A</button>
+      <button onClick={sorteeriTahedKasv}>Sorteeri tähed kasvavalt</button>
+      <button onClick={sorteeriTahedKah}>Sorteeri tähed kahanevalt</button>
+      <button onClick={sorteeriTeineTahtAZ}>Sorteeri teise tähe järgi A-Z</button>
+      <br />
+      <button onClick={filtreeriTahemarkeKuni6}>Filtreeri välja kuni 6-tähelised</button>
+      <button onClick={filtreeriTahemarke6}>Filtreeri välja täpselt 6-tähelised</button>
+      <button onClick={filtreeriLoppebTahegaA}>Filtreeri välja a-tähega lõppevad</button>
+      <button onClick={filtreeriLoppebTahegaY}>Filtreeri välja y-tähega lõppevad</button>
+      <button onClick={filtreeriPaarisarvud}>Filtreeri paarisarvu tähti sisaldavad</button>
+      <br />
+      <button onClick={reset}>Reset</button>
+      <div>Tooteid kokku: {tooted.length}tk</div>
+      <br />
+      <label htmlFor="otsingriba">Otsi:</label>
+      <input ref={otsingRef} onChange={otsi} id="otsingriba" type="text" />
+      {tooted.map((toode, index) => 
+      <div>
+        {toode.nimi}
+        <Link to={"/toode/" + index}>
+          <button>Vt. lähemalt</button>
+        </Link>  
+      </div>)}
     </div>
   )
 }
 
-  // sorteeri A-Z
-  // sorteeri Z-A
-  // tähed kasvavalt
-  // tähed kahanevalt
-  // teine täht A-Z
 
-  // kuni 6 tähelised
-  // täpselt 6 tähelised
-  // a-ga lõppevad
-  // y-ga lõppevad
-  // paaristähti arv sisalduviad
-
-  // kogus
-  // reset
 
 export default Tooted

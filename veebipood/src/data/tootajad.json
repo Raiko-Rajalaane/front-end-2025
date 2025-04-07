@@ -1,0 +1,12 @@
+[
+    {"eesnimi": "Karl", "vanus": 21, "amet": "Pottsepp"},
+    {"eesnimi": "Robin", "vanus": 25, "amet": "Torumees"},
+    {"eesnimi": "Siim", "vanus": 15, "amet": "Poemüüja"},
+    {"eesnimi": "Tambet", "vanus": 42, "amet": "Maakler"},
+    {"eesnimi": "Tormi", "vanus": 36, "amet": "Tehnik"},
+    {"eesnimi": "Meelis", "vanus": 61, "amet": "Mehaanik"},
+    {"eesnimi": "Karl-Friedrich", "vanus": 11, "amet": "Kalamees"},
+    {"eesnimi": "Sten", "vanus": 65, "amet": "Jalgrattur"},
+    {"eesnimi": "Toomas", "vanus": 21, "amet": "Lukksepp"},
+    {"eesnimi": "Sebastian", "vanus": 19, "amet": "Ehitaja"}
+]

@@ -1,11 +1,20 @@
 import { useRef, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
-function Seaded() {
-  const [keel, setKeel] = useState("est");
+// Salvestuseks:
+// 1) Andmebaas --> vaja eraldiseisvat teenusepakkujat
+// 2) LocalStorage
+
+// LocalStorage eksisteerib ainult sellest arvutis, selles brauseris
+
+function Seaded() {  
+  const [keel, setKeel] = useState(localStorage.getItem("keel") || "et");
   const aadressRef = useRef();
   const emailRef = useRef();
   const telefonRef = useRef();
+
+  const { t, i18n } = useTranslation();
 
   const sisestaAadress = () => {
     if (aadressRef.current.value.length < 4) {
@@ -33,38 +42,63 @@ function Seaded() {
 
   }
 
+  const muudaKeelEst = () => {
+    setKeel("et");
+    localStorage.setItem("keel", "et");
+    i18n.changeLanguage("et");
+  }
+
+  const muudaKeelEng = () => {
+    setKeel("en");
+    localStorage.setItem("keel", "en");
+    i18n.changeLanguage("en");
+  }
+
+  const muudaKeelRus = () => {
+    setKeel("ru");
+    localStorage.setItem("keel", "ru");
+    i18n.changeLanguage("ru");
+  }
+
+  const muudaKeelEsp = () => {
+    setKeel("es");
+    localStorage.setItem("keel", "es");
+  }
+
+  
+
   return (
     <div>
-        <label>Aadress: </label>
+        <label>{t("settings.address")}</label>
         <input ref={aadressRef} type="text" />
-        <button onClick={sisestaAadress}>Sisesta</button>
+        <button onClick={sisestaAadress}>{t("button.insert")}</button>
 
         <br /> <br />
 
         <label>Email: </label>
         <input ref={emailRef} type="text" />
-        <button onClick={sisestaEmail}>Sisesta</button>
+        <button onClick={sisestaEmail}>{t("button.insert")}</button>
 
         <br /> <br />
 
-        <label>Telefon: </label>
+        <label>{t("settings.telephone")}</label>
         <input ref={telefonRef} type="text" />
-        <button onClick={sisestaTelefon}>Sisesta</button>
+        <button onClick={sisestaTelefon}>{t("button.insert")}</button>
 
 
         <br /> <br />
         <div>Hetkel aktiivse keele lühend: {keel}</div>
-        <button className={keel === "est" ? "aktiivne-keel" : undefined} onClick={() => setKeel("est")}>Eesti</button>
-        <button className={keel === "eng" ? "aktiivne-keel" : undefined} onClick={() => setKeel("eng")}>English</button>
-        <button className={keel === "rus" ? "aktiivne-keel" : undefined} onClick={() => setKeel("rus")}>Pycckij</button>
-        <button className={keel === "esp" ? "aktiivne-keel" : undefined} onClick={() => setKeel("esp")}>Espanol</button>
+        <button className={keel === "et" ? "aktiivne-keel" : undefined} onClick={muudaKeelEst}>Eesti</button>
+        <button className={keel === "en" ? "aktiivne-keel" : undefined} onClick={muudaKeelEng}>English</button>
+        <button className={keel === "ru" ? "aktiivne-keel" : undefined} onClick={muudaKeelRus}>Pycckij</button>
+        <button className={keel === "es" ? "aktiivne-keel" : undefined} onClick={muudaKeelEsp}>Espanol</button>
         
-        {keel === "est" && <div>Leht on eesti keelne</div>}
-        {keel === "eng" && <div>Page is in English</div>}
-        {keel === "rus" && <div>Страница на русском языке</div>}
-        {keel === "esp" && <div>La página está en español</div>}
+        {keel === "et" && <div>Leht on eesti keelne</div>}
+        {keel === "en" && <div>Page is in English</div>}
+        {keel === "ru" && <div>Страница на русском языке</div>}
+        {keel === "es" && <div>La página está en español</div>}
         <br />
-        {keel !== "est" && <div><i>Translations other than Estonian are not ready</i></div>}
+        {keel !== "et" && <div><i>Translations other than Estonian are not ready</i></div>}
     
      <ToastContainer />
      <ToastContainer
