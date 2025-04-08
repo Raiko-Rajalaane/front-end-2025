@@ -1,9 +1,11 @@
 import { useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import productsFromFile from "../../data/products.json"
+import { useTranslation } from 'react-i18next';
 
 function EditProduct() {
   const {index} = useParams();
+  const { t } = useTranslation();
   const product = productsFromFile[index];
 
    const idRef = useRef();
@@ -35,23 +37,23 @@ function EditProduct() {
 
   return (
     <div>
-      <label>Product ID: </label>
+      <label>{t("editProduct.id")} </label>
       <input defaultValue={product.id} ref={idRef} type="text" /> <br />
-      <label>Title: </label>
+      <label>{t("editProduct.title")}</label>
       <input defaultValue={product.title} ref={titleRef} type="text" /> <br />
-      <label>Price: </label>
+      <label>{t("editProduct.price")}</label>
       <input defaultValue={product.price} ref={priceRef} type="number" /> <br />
-      <label>Description: </label>
+      <label>{t("editProduct.description")}</label>
       <input defaultValue={product.description} ref={descRef} type="text" /> <br />
-      <label>Category: </label>
+      <label>{t("editProduct.category")}</label>
       <input defaultValue={product.category} ref={categoryRef} type="text" /> <br />
-      <label>Image link: </label>
+      <label>{t("editProduct.image")}</label>
       <input defaultValue={product.image} ref={imgRef} type="text" /> <br />
-      <label>Rating: </label>
+      <label>{t("editProduct.rating")}</label>
       <input defaultValue={product.rating.rate} ref={rateRef} type="text" /> <br />
-      <label>Count: </label>
+      <label>{t("editProduct.count")}</label>
       <input defaultValue={product.rating.count} ref={countRef} type="text" /> <br />
-      <button onClick={edit}>Edit product</button>
+      <button onClick={edit}>{t("editProduct.editButton")}</button>
     </div>
   )
 }

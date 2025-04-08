@@ -1,9 +1,11 @@
 import { useState } from "react"
 import cartFromFile from "../../data/cart.json"
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 function Cart() {
   const [cart, setCart] = useState(cartFromFile);
+  const { t } = useTranslation();
 
   const remove = (index) => {
     cartFromFile.splice(index, 1);
@@ -25,15 +27,15 @@ function Cart() {
     <div>
       {cart.length === 0 && 
         <div>
-          Your cart is empty. <Link to='/' >Browse products.</Link>
+          {t("cart.empty")}<Link to='/' >{t("cart.browseLink")}</Link>
         </div>
       }
 
       {cart.length > 0 &&
         <>
-          <div>Items in cart: {cart.length}</div>
-          <div>Total price: {totalPrice()}</div>
-          <button onClick={clearCart}>Clear cart</button>
+          <div>{t("cart.itemsCount")}{cart.length}</div>
+          <div>{t("cart.total")}{totalPrice()}</div>
+          <button onClick={clearCart}>{t("cart.clear")}</button>
         </>  
       }
 
@@ -42,7 +44,7 @@ function Cart() {
           <img style={{"width": "100px"}} src={product.image} alt="" />  
           <div>{product.title}</div>
           <div>{product.price}</div>
-          <button onClick={() => remove(index)}>Remove from cart</button> <br /><br />
+          <button onClick={() => remove(index)}>{t("cart.remove")}</button> <br /><br />
         </div>
       )}
     </div>

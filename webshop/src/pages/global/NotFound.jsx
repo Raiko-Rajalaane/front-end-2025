@@ -1,14 +1,15 @@
-import { Link } from "react-router-dom"
+import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
 function NotFound() {
+  const { t } = useTranslation();
+
   return (
     <div>
-      <h1>Page not found</h1>
-      <Link to='/'>
-        Back to Home
-      </Link>
+      <h1>{t('notFound.title')}</h1>
+      <Link to="/">{t('notFound.link')}</Link>
     </div>
-  )
+  );
 }
 
-export default NotFound
+export default NotFound;
