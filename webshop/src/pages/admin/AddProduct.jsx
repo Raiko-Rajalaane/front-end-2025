@@ -1,8 +1,10 @@
-import { useRef } from "react";
-import productsFromFile from "../../data/products.json"
+import { useRef } from 'react';
+import productsFromFile from '../../data/products.json';
+import { useTranslation } from 'react-i18next';
 
 function AddProduct() {
-  
+  const { t } = useTranslation();
+
   const titleRef = useRef();
   const priceRef = useRef();
   const descRef = useRef();
@@ -13,38 +15,38 @@ function AddProduct() {
 
   const addNew = () => {
     productsFromFile.push({
-      "id": productsFromFile.length + 1,
-      "title": titleRef.current.value,
-      "price": priceRef.current.value,
-      "description": descRef.current.value,
-      "category": categoryRef.current.value,
-      "image": imgRef.current.value,
-      "rating": {
-        "rate": rateRef.current.value,
-        "count": countRef.current.value
-      }
+      id: productsFromFile.length + 1,
+      title: titleRef.current.value,
+      price: priceRef.current.value,
+      description: descRef.current.value,
+      category: categoryRef.current.value,
+      image: imgRef.current.value,
+      rating: {
+        rate: rateRef.current.value,
+        count: countRef.current.value,
+      },
     });
-  }
-  
+  };
+
   return (
     <div>
-      <label>Title: </label>
+      <label>{t('addProduct.title')}</label>
       <input ref={titleRef} type="text" /> <br />
-      <label>Price: </label>
+      <label>{t('addProduct.price')}</label>
       <input ref={priceRef} type="number" /> <br />
-      <label>Description: </label>
+      <label>{t('addProduct.description')}</label>
       <input ref={descRef} type="text" /> <br />
-      <label>Category: </label>
+      <label>{t('addProduct.category')}</label>
       <input ref={categoryRef} type="text" /> <br />
-      <label>Image link: </label>
+      <label>{t('addProduct.image')}</label>
       <input ref={imgRef} type="text" /> <br />
-      <label>Rating: </label>
+      <label>{t('addProduct.rating')}</label>
       <input ref={rateRef} type="number" /> <br />
-      <label>Count: </label>
+      <label>{t('addProduct.count')}</label>
       <input ref={countRef} type="number" /> <br />
-      <button onClick={addNew}>Add product</button>
+      <button onClick={addNew}>{t('addProduct.addButton')}</button>
     </div>
-  )
+  );
 }
 
-export default AddProduct
+export default AddProduct;

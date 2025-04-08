@@ -3,14 +3,16 @@ import { toast } from "react-toastify";
 import productsFromFile from "../../data/products.json"
 import cartFromFile from "../../data/cart.json"
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 
 function HomePage() {
   const [products, setProducts] = useState(productsFromFile.slice());
+  const { t } = useTranslation();
 
   const addToCart = (product) => {
     cartFromFile.push(product);
-    toast.success("Added to cart!")
+    toast.success(t("homepage.toastAdded"))
   }
 
   const sortAZ = () => {
@@ -50,18 +52,18 @@ function HomePage() {
 
   return (
     <div>
-      <button onClick={sortAZ}>Name A-Z</button>
-      <button onClick={sortZA}>Name Z-A</button>
-      <button onClick={priceAsc}>Price ascending</button>
-      <button onClick={priceDesc}>Price descending</button>
-      <button onClick={ratingBest}>Rating (best)</button>
-      <button onClick={ratingWorst}>Rating (worst)</button>
+      <button onClick={sortAZ}>{t("homepage.sortAZ")}</button>
+      <button onClick={sortZA}>{t("homepage.sortZA")}</button>
+      <button onClick={priceAsc}>{t("homepage.priceAsc")}</button>
+      <button onClick={priceDesc}>{t("homepage.priceDesc")}</button>
+      <button onClick={ratingBest}>{t("homepage.ratingBest")}</button>
+      <button onClick={ratingWorst}>{t("homepage.ratingWorst")}</button>
 
       <br /><br />
-      <button onClick={() => filterCategory("men's clothing")}>Men's clothing</button>
-      <button onClick={() => filterCategory("women's clothing")}>Women's clothing</button>
-      <button onClick={() => filterCategory("jewelery")}>Jewellery</button>
-      <button onClick={() => filterCategory("electronics")}>Electronics</button>
+      <button onClick={() => filterCategory("men's clothing")}>{t("homepage.category.men")}</button>
+      <button onClick={() => filterCategory("women's clothing")}>{t("homepage.category.women")}</button>
+      <button onClick={() => filterCategory("jewelery")}>{t("homepage.category.jewelery")}</button>
+      <button onClick={() => filterCategory("electronics")}>{t("homepage.category.electronics")}</button>
 
       <br /><br />
 
@@ -70,8 +72,8 @@ function HomePage() {
           <img style={{width: "100px"}} src={product.image} alt="" />
           <div>{product.title}</div>
           <div>{product.price}</div>
-          <Link to={"/product/" + index}><button>View product</button></Link>
-          <button onClick={() => addToCart(product)}>Add to cart</button>
+          <Link to={"/product/" + index}><button>{t("homepage.viewProduct")}</button></Link>
+          <button onClick={() => addToCart(product)}>{t("homepage.addToCart")}</button>
           <br /> <br />
         </div>
       )}

@@ -1,13 +1,15 @@
+import { useTranslation } from "react-i18next"
 
 function Signup() {
+  const { t } = useTranslation();
   
   return (
     <div>
-      <label htmlFor="">Email:</label> <br />
+      <label>{t("signup.email")}</label> <br />
       <input type="text" /> <br />
-      <label htmlFor="">Password:</label> <br />
+      <label>{t("signup.password")}</label> <br />
       <input type="text" /> <br />
-      <button>Register</button>
+      <button>{t("signup.registerButton")}</button>
     </div>
   )
 }
