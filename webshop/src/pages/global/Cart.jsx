@@ -16,8 +16,8 @@ function Cart() {
   };
 
   const clearCart = () => {
-    setCart([]); 
-    localStorage.removeItem('cart'); 
+    setCart([]);
+    localStorage.removeItem('cart');
   };
 
   const totalPrice = () => {
@@ -43,14 +43,14 @@ function Cart() {
           </div>
           <div>
             {t('cart.total')}
-            {totalPrice()}
+            {totalPrice().toFixed(2)}
           </div>
           <button onClick={clearCart}>{t('cart.clear')}</button>
         </>
       )}
 
       {cart.map((product, index) => (
-        <div key={product.title}>
+        <div key={index}>
           <img style={{ width: '100px' }} src={product.image} alt="" />
           <div>{product.title}</div>
           <div>{product.price}</div>

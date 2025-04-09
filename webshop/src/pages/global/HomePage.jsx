@@ -3,16 +3,18 @@ import { toast } from 'react-toastify';
 import productsFromFile from '../../data/products.json';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import CarouselGallery from '../../components/CarouselGallery';
+import styles from '../../css/HomePage.module.css';
 
 function HomePage() {
   const [products, setProducts] = useState(productsFromFile.slice());
   const { t } = useTranslation();
 
   const addToCart = (product) => {
-    const oldCart = JSON.parse(localStorage.getItem('cart')) || [];
-    const updatedCart = oldCart.slice();
-    updatedCart.push(product);
-    localStorage.setItem('cart', JSON.stringify(updatedCart));
+    const cartLS = JSON.parse(localStorage.getItem('cart')) || [];
+    // const updatedCart = oldCart.slice();
+    cartLS.push(product);
+    localStorage.setItem('cart', JSON.stringify(cartLS));
     toast.success(t('homepage.toastAdded'));
   };
 
@@ -55,6 +57,8 @@ function HomePage() {
 
   return (
     <div>
+      <CarouselGallery />
+
       <button onClick={sortAZ}>{t('homepage.sortAZ')}</button>
       <button onClick={sortZA}>{t('homepage.sortZA')}</button>
       <button onClick={priceAsc}>{t('homepage.priceAsc')}</button>
@@ -77,23 +81,22 @@ function HomePage() {
         {t('homepage.category.electronics')}
       </button>
 
-      <br />
-      <br />
-
-      {products.map((product, index) => (
-        <div key={product.id}>
-          <img style={{ width: '100px' }} src={product.image} alt="" />
-          <div>{product.title}</div>
-          <div>{product.price}</div>
-          <Link to={'/product/' + index}>
-            <button>{t('homepage.viewProduct')}</button>
-          </Link>
-          <button onClick={() => addToCart(product)}>
-            {t('homepage.addToCart')}
-          </button>
-          <br /> <br />
-        </div>
-      ))}
+      <div className={styles.products}>
+        {products.map((product) => (
+          <div key={product.id} className={styles.product}>
+            <img className={styles.image} src={product.image} alt="" />
+            <div className={styles.title}>{product.title}</div>
+            <div className={styles.price}>{product.price.toFixed(2)}€</div>
+            <Link to={'/product/' + product.id}>
+              <button>{t('homepage.viewProduct')}</button>
+            </Link>
+            <button onClick={() => addToCart(product)}>
+              {t('homepage.addToCart')}
+            </button>
+            
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

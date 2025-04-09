@@ -1,6 +1,6 @@
 #root {
   margin: 0 auto;
-  padding: 2rem;
+  /* padding: 2rem; */
   text-align: center;
 }
 
@@ -8,7 +8,8 @@
   margin: auto;
 }
 
-td, th {
+td,
+th {
   padding: 8px;
   text-align: left;
   border: 1px solid #333;
@@ -23,3 +24,4 @@ td, th {
   margin: 3%;
   border-radius: 15px;
 }
+
