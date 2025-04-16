@@ -6,7 +6,12 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 function NavigationBar() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
+  const changeLang = (newLang) => {
+    i18n.changeLanguage(newLang);
+    localStorage.setItem('language', newLang)
+  }
 
   // href --> HTMLs. Teeb refreshi. Väliste URLde jaoks
   // Link to="" --> HTMLs. Reacti siseseks kasutamiseks
@@ -36,6 +41,10 @@ function NavigationBar() {
             </Nav.Link>
           </Nav>
           <Nav>
+            <img onClick={() => changeLang("en")} className='icon' src="/english.png" alt="" />
+            <img onClick={() => changeLang("et")} className='icon' src="/estonian.png" alt="" />
+            <img onClick={() => changeLang("ru")} className='icon' src="/russian.png" alt="" />
+            <img onClick={() => changeLang("es")} className='icon' src="/spanish.png" alt="" />
             <Nav.Link as={Link} to="/login">
               Login
             </Nav.Link>

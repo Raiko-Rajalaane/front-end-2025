@@ -25,3 +25,17 @@ th {
   border-radius: 15px;
 }
 
+.icon {
+  width: 30px;
+  height: 30px;
+  margin : 3px;
+}
+
+.icon:hover {
+  cursor: pointer;
+  scale: 1.1
+}
+
+icon:active {
+  padding: 1px;
+}

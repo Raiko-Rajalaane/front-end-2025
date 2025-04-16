@@ -1,6 +1,9 @@
 import { useRef } from 'react';
 import productsFromFile from '../../data/products.json';
+import categoriesFromFile from '../../data/categories.json';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
+import { invalidField } from '../../util/validations';
 
 function AddProduct() {
   const { t } = useTranslation();
@@ -14,6 +17,23 @@ function AddProduct() {
   const countRef = useRef();
 
   const addNew = () => {
+    // if (titleRef.current.value === '') {
+    //   toast.error('Title is missing');
+    //   return;
+    // }
+    // if (priceRef.current.value === '') {
+    //   toast.error('Price is missing');
+    //   return;
+    // }
+    // if (priceRef.current.value < 0) {
+    //   toast.error('Price cannot be negative');
+    //   return;
+    // }
+
+    if (invalidField(titleRef.current.value, priceRef.current.value) === true) {
+      return;
+    }
+
     productsFromFile.push({
       id: productsFromFile.length + 1,
       title: titleRef.current.value,
@@ -26,6 +46,14 @@ function AddProduct() {
         count: countRef.current.value,
       },
     });
+    toast.success('Toode lisatud!');
+    titleRef.current.value = '';
+    priceRef.current.value = '';
+    descRef.current.value = '';
+    categoryRef.current.value = '';
+    imgRef.current.value = '';
+    rateRef.current.value = '';
+    countRef.current.value = '';
   };
 
   return (
@@ -37,7 +65,13 @@ function AddProduct() {
       <label>{t('addProduct.description')}</label>
       <input ref={descRef} type="text" /> <br />
       <label>{t('addProduct.category')}</label>
-      <input ref={categoryRef} type="text" /> <br />
+      {/* <input ref={categoryRef} type="text" /> <br /> */}
+      <select ref={categoryRef}>
+        {categoriesFromFile.map((category) => (
+          <option key={category.name}>{category.name}</option>
+        ))}
+      </select>{' '}
+      <br />
       <label>{t('addProduct.image')}</label>
       <input ref={imgRef} type="text" /> <br />
       <label>{t('addProduct.rating')}</label>

@@ -1,13 +1,14 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 import productsFromFile from '../../data/products.json';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import styles from "../../css/maintainProducts.module.css";
+import styles from '../../css/maintainProducts.module.css';
 
 function MaintainProducts() {
   const [products, setProducts] = useState(productsFromFile.slice());
   const { t } = useTranslation();
+  const searchRef = useRef();
 
   const remove = (index) => {
     productsFromFile.splice(index, 1);
@@ -15,8 +16,17 @@ function MaintainProducts() {
     toast.success(t('maintainProducts.toastRemoved'));
   };
 
+  //TODO: tõstutundlikkus ära kaotada
+  const search = () => {
+    const result = productsFromFile.filter(product => 
+      product.title.toLowerCase().includes(searchRef.current.value.toLowerCase()));
+    setProducts(result);
+  };
+
   return (
     <div>
+      <label>{t('maintain.search')}</label>
+      <input ref={searchRef} onChange={search} type="text" />
       <table>
         <thead>
           <tr>
@@ -33,7 +43,10 @@ function MaintainProducts() {
         </thead>
         <tbody>
           {products.map((product, index) => (
-            <tr key={product.id} className={product.active ? styles.active : styles.inactive}>
+            <tr
+              key={product.id}
+              className={product.active ? styles.active : styles.inactive}
+            >
               <td>{product.id}</td>
               <td>{product.title}</td>
               <td>{product.price}</td>

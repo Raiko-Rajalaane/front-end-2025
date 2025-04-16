@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import { useTranslation } from 'react-i18next'
 
 
-function NavigationBar() {
+function NavigationBar2() {
   const { t } = useTranslation();
 
   return (
@@ -25,4 +25,4 @@ function NavigationBar() {
   )
 }
 
-export default NavigationBar
+export default NavigationBar2

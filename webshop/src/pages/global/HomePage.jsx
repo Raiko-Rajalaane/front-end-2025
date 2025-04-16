@@ -10,10 +10,15 @@ function HomePage() {
   const [products, setProducts] = useState(productsFromFile.slice());
   const { t } = useTranslation();
 
-  const addToCart = (product) => {
+  const addToCart = (productClicked) => {
     const cartLS = JSON.parse(localStorage.getItem('cart')) || [];
-    // const updatedCart = oldCart.slice();
-    cartLS.push(product);
+
+    const productInCart = cartLS.find((p) => p.toode.id === productClicked.id);
+    if (productInCart !== undefined) {
+      productInCart.kogus += 1;
+    } else {
+      cartLS.push({ toode: productClicked, kogus: 1 });
+    }
     localStorage.setItem('cart', JSON.stringify(cartLS));
     toast.success(t('homepage.toastAdded'));
   };
@@ -93,7 +98,6 @@ function HomePage() {
             <button onClick={() => addToCart(product)}>
               {t('homepage.addToCart')}
             </button>
-            
           </div>
         ))}
       </div>
